@@ -12,14 +12,13 @@
     }
     body, html {
       height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
       overflow: hidden;
     }
 
     .section {
       height: 100vh;
       width: 100%;
-      position: relative;
     }
 
     video {
@@ -35,27 +34,12 @@
       left: 0;
       height: 100%;
       width: 100%;
-      backdrop-filter: blur(8px);
-      background-color: rgba(255,255,255,0.3);
+      background-color: rgba(0,0,0,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       transition: opacity 1s ease;
-      text-align: center;
-    }
-
-    #ucapan {
-      position: absolute;
-      bottom: 60px;
-      width: 100%;
-      text-align: center;
-      font-family: vandella, sans-serif;
-      font-weight: bold;
-      color: black;
-      font-size: 20px;
-      z-index: 11;
-      display: none;
     }
 
     .btn-buka {
@@ -81,23 +65,66 @@
       display: none;
     }
 
+    .love-button {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      z-index: 9999;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 32px;
+      color: gray;
+      transition: color 0.3s ease;
+    }
+
+    .love-button.active {
+      color: red;
+    }
+
+    .love-bubble {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      font-size: 18px;
+      color: red;
+      animation: floatUp 1s ease-out forwards;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
     body.scrollable {
       overflow-y: scroll;
+    }
+
+    @keyframes zoomFade {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Halaman 1 -->
+  <!-- Video pertama + tombol -->
   <div class="section" id="halaman1">
     <video src="video1.mp4" autoplay muted loop></video>
     <div id="overlay">
       <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
-    <div id="ucapan"></div>
   </div>
 
-  <!-- Halaman 2-4 -->
+  <!-- Video 2-4 -->
   <div class="section"><video src="video2.mp4" autoplay muted loop></video></div>
   <div class="section"><video src="video3.mp4" autoplay muted loop></video></div>
   <div class="section"><video src="video4.mp4" autoplay muted loop></video></div>
@@ -108,11 +135,13 @@
     <span id="ikonMusik">&#9835;</span>
   </div>
 
+  <!-- Tombol Love -->
+  <button class="love-button" id="loveBtn" onclick="klikLove()">❤️</button>
+
   <script>
     const overlay = document.getElementById('overlay');
     const musik = document.getElementById('musik');
     const toggle = document.querySelector('.musik-toggle');
-    const ucapan = document.getElementById('ucapan');
     let musikMain = false;
 
     function bukaUndangan() {
@@ -139,14 +168,9 @@
       }
     }
 
-    // Tampilkan ucapan jika ada parameter ?to=
-    const params = new URLSearchParams(window.location.search);
-    const nama = params.get("to");
-    if (nama) {
-      ucapan.textContent = `Yth. ${decodeURIComponent(nama)}`;
-      ucapan.style.display = 'block';
-    }
-  </script>
+    function klikLove() {
+      const btn = document.getElementById("loveBtn");
+      btn.classList.toggle("active");
 
-</body>
-</html>
+      const bubble = document.createElement("div");
+      bubble.class
