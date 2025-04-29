@@ -54,6 +54,44 @@
       cursor: pointer;
     }
 
+    .love-button {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.love-button.active {
+  color: red;
+}
+
+.love-bubble {
+  position: fixed;
+  bottom: 40px;
+  right: 24px;
+  font-size: 18px;
+  color: red;
+  animation: floatUp 1s ease-out forwards;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(1.5);
+    opacity: 0;
+  }
+}
     .musik-toggle {
       position: fixed;
       top: 16px;
@@ -98,6 +136,8 @@
     <span id="ikonMusik">&#9835;</span>
   </div>
 
+  <button class="love-button" id="loveBtn" onclick="klikLove()">❤️</button>
+
   <script>
     const overlay = document.getElementById('overlay');
     const musik = document.getElementById('musik');
@@ -125,6 +165,22 @@
         musik.play();
         musikMain = true;
         document.getElementById('ikonMusik').textContent = '♫';
+      }
+
+      function klikLove() {
+  const btn = document.getElementById("loveBtn");
+  btn.classList.toggle("active");
+
+  // Buat gelembung love
+  const bubble = document.createElement("div");
+  bubble.classList.add("love-bubble");
+  bubble.textContent = "❤️";
+  document.body.appendChild(bubble);
+
+  // Hapus bubble setelah animasi selesai
+  setTimeout(() => {
+    bubble.remove();
+  }, 1000);
       }
     }
   </script>
