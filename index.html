@@ -12,13 +12,14 @@
     }
     body, html {
       height: 100%;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
     .section {
       height: 100vh;
       width: 100%;
+      position: relative;
     }
 
     video {
@@ -34,7 +35,8 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      background-color: rgba(255,255,255,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -44,15 +46,17 @@
     }
 
     #ucapan {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 18px;
-  z-index: 10;
-  display: none;
-      }
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: black;
+      font-size: 20px;
+      z-index: 11;
+      display: none;
+    }
 
     .btn-buka {
       padding: 16px 32px;
@@ -80,27 +84,20 @@
     body.scrollable {
       overflow-y: scroll;
     }
-
-    @keyframes zoomFade {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Ucapan tetap -->
-  <div id="ucapan"></div>
-
-  <!-- Video pertama + tombol -->
+  <!-- Halaman 1 -->
   <div class="section" id="halaman1">
     <video src="video1.mp4" autoplay muted loop></video>
     <div id="overlay">
       <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
+    <div id="ucapan"></div>
   </div>
 
-  <!-- Video 2-4 -->
+  <!-- Halaman 2-4 -->
   <div class="section"><video src="video2.mp4" autoplay muted loop></video></div>
   <div class="section"><video src="video3.mp4" autoplay muted loop></video></div>
   <div class="section"><video src="video4.mp4" autoplay muted loop></video></div>
