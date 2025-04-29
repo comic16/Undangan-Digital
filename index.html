@@ -44,9 +44,17 @@
     }
 
     #ucapan {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
-      font-size: 20px;
-      margin-bottom: 20px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 18px;
+      z-index: 9999;
+      display: none;
     }
 
     .btn-buka {
@@ -84,11 +92,13 @@
 </head>
 <body>
 
+  <!-- Ucapan tetap -->
+  <div id="ucapan"></div>
+
   <!-- Video pertama + tombol -->
   <div class="section" id="halaman1">
     <video src="video1.mp4" autoplay muted loop></video>
     <div id="overlay">
-      <div id="ucapan"></div>
       <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
   </div>
@@ -108,6 +118,7 @@
     const overlay = document.getElementById('overlay');
     const musik = document.getElementById('musik');
     const toggle = document.querySelector('.musik-toggle');
+    const ucapan = document.getElementById('ucapan');
     let musikMain = false;
 
     function bukaUndangan() {
@@ -138,8 +149,8 @@
     const params = new URLSearchParams(window.location.search);
     const nama = params.get("to");
     if (nama) {
-      const ucapan = document.getElementById("ucapan");
       ucapan.textContent = `Yth. ${decodeURIComponent(nama)}`;
+      ucapan.style.display = 'block';
     }
   </script>
 
