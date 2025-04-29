@@ -1,3 +1,5 @@
+*Template undangan keren*
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -65,45 +67,6 @@
       display: none;
     }
 
-    .love-button {
-      position: fixed;
-      bottom: 80px;
-      right: 16px;
-      z-index: 9999;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 32px;
-      color: gray;
-      transition: color 0.3s ease;
-    }
-
-    .love-button.active {
-      color: red;
-    }
-
-    .love-bubble {
-      position: fixed;
-      bottom: 100px;
-      right: 24px;
-      font-size: 18px;
-      color: red;
-      animation: floatUp 1s ease-out forwards;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-100px) scale(1.5);
-        opacity: 0;
-      }
-    }
-
     body.scrollable {
       overflow-y: scroll;
     }
@@ -135,9 +98,6 @@
     <span id="ikonMusik">&#9835;</span>
   </div>
 
-  <!-- Tombol Love -->
-  <button class="love-button" id="loveBtn" onclick="klikLove()">❤️</button>
-
   <script>
     const overlay = document.getElementById('overlay');
     const musik = document.getElementById('musik');
@@ -167,10 +127,7 @@
         document.getElementById('ikonMusik').textContent = '♫';
       }
     }
+  </script>
 
-    function klikLove() {
-      const btn = document.getElementById("loveBtn");
-      btn.classList.toggle("active");
-
-      const bubble = document.createElement("div");
-      bubble.class
+</body>
+</html>
