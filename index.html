@@ -40,6 +40,13 @@
       justify-content: center;
       flex-direction: column;
       transition: opacity 1s ease;
+      text-align: center;
+    }
+
+    #ucapan {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 20px;
     }
 
     .btn-buka {
@@ -81,6 +88,7 @@
   <div class="section" id="halaman1">
     <video src="video1.mp4" autoplay muted loop></video>
     <div id="overlay">
+      <div id="ucapan"></div>
       <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
     </div>
   </div>
@@ -124,6 +132,14 @@
         musikMain = true;
         document.getElementById('ikonMusik').textContent = '♫';
       }
+    }
+
+    // Tampilkan ucapan jika ada parameter ?to=
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("to");
+    if (nama) {
+      const ucapan = document.getElementById("ucapan");
+      ucapan.textContent = `Yth. ${decodeURIComponent(nama)}`;
     }
   </script>
 
