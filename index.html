@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Undangan Digital</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .halaman {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+    }
+    .aktif {
+      display: block;
+      animation: zoomFade 1s ease forwards;
+    }
+    @keyframes zoomFade {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .btn-buka {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 16px 32px;
+      font-size: 18px;
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .musik-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 9999;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      display: none;
+    }
+    video {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- Halaman 1 -->
+  <div id="halaman1" class="halaman aktif">
+    <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
+  </div>
+
+  <!-- Halaman 2-5 -->
+  <div id="halaman2" class="halaman">
+    <video src="video1.mp4" autoplay muted loop></video>
+  </div>
+  <div id="halaman3" class="halaman">
+    <video src="video2.mp4" autoplay muted loop></video>
+  </div>
+  <div id="halaman4" class="halaman">
+    <video src="video3.mp4" autoplay muted loop></video>
+  </div>
+  <div id="halaman5" class="halaman">
+    <video src="video4.mp4" autoplay muted loop></video>
+  </div>
+
+  <!-- Tombol Musik -->
+  <div class="musik-toggle" onclick="toggleMusik()">
+    <span id="ikonMusik">&#9835;</span>
+  </div>
+
+  <audio id="musik" src="musik.mp3" loop></audio>
+
+  <script>
+    const musik = document.getElementById('musik');
+    const tombolMusik = document.querySelector('.musik-toggle');
+    let musikMain = false;
+
+    function bukaUndangan() {
+      const halaman1 = document.getElementById('halaman1');
+      halaman1.classList.remove('aktif');
+      halaman1.style.display = 'none';
+
+      for (let i = 2; i <= 5; i++) {
+        const halaman = document.getElementById('halaman' + i);
+        halaman.classList.add('aktif');
+      }
+
+      musik.play();
+      musikMain = true;
+      tombolMusik.style.display = 'block';
+    }
+
+    function toggleMusik() {
+      if (musikMain) {
+        musik.pause();
+        musikMain = false;
+        document.getElementById('ikonMusik').textContent = '♪';
+      } else {
+        musik.play();
+        musikMain = true;
+        document.getElementById('ikonMusik').textContent = '♫';
+      }
+    }
+  </script>
+</body>
+</html>
